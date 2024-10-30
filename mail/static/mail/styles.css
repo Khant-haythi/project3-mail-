@@ -1,0 +1,35 @@
+textarea {
+    min-height: 400px;
+}
+
+.email-item {
+    /* styles for all email items */
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  /* If email has been read */
+  .email-item.read {
+    background-color: #f2f2f2;
+  }
+  
+  /* If email is unread */
+  .email-item.unread {
+    background-color: #fff;
+  }
+
+  .email-item .sender {
+    flex: 1;
+    text-align: left;
+  }
+  
+  .email-item .subject {
+    flex: 2;
+    text-align: center;
+  }
+  
+  .email-item .timestamp {
+    flex: 1;
+    text-align: right;
+  }
