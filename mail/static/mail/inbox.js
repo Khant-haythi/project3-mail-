@@ -52,24 +52,56 @@ function load_mailbox(mailbox) {
       emailItem.classList.add(email.read ? 'read' : 'unread'); //shorthand way of if-else statement
 
       emailItem.innerHTML = `
-    <div class="sender">${email.sender}</div>
+    <div class="sender">FROM: ${email.sender}</div>
     <div class="subject">${email.subject}</div>
     <div class="timestamp">${email.timestamp}</div>
       `;
 
-    // Append the email item to the emails-view container
-    document.querySelector('#emails-view').append(emailItem);
     emailItem.addEventListener ('click',() =>  view_email(email.id));
-    console.log('Fetching emails for mailbox:', mailbox) 
-      
+    console.log(mailbox);
+
+  // Only show the archive/unarchive button for inbox emails
+  if (mailbox == 'inbox' || mailbox == 'archive') {
+    // Create the archive/unarchive button
+    const archiveButton = document.createElement('button');
+    archiveButton.textContent = email.archived ? 'Unarchive' : 'Archive';
+    archiveButton.addEventListener('click', () =>
+      toggleArchive(email.id,email.archived)
+    )
+
+    // Append the button to the emailItem
+    emailItem.appendChild(archiveButton);
+    }
+   // Append the email item to the emails-view container
+   document.querySelector('#emails-view').append(emailItem);
+   });
     });
-})
-.catch(error => {
-  console.error('Error loading mailbox:', error);
-  // Display an error message or handle the error in some other way
-  });
-  
 }
+
+
+function toggleArchive(emailid,archived){
+
+  fetch(`/emails/${emailid}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+        archived: !archived
+    })
+  }).then ( () => {
+
+    const emailItems = document.querySelectorAll('.email-item');
+    emailItems.forEach(item => {
+
+        if (item.dataset.emailId == emailid) {
+          item.querySelector('button').textContent = email.archived ? 'Unarchive' : 'Archive';
+        }
+    
+  }  )
+  // Reload the appropriate mailbox (inbox or archive)
+  load_mailbox(archived ? 'inbox' : 'archive');
+} )
+  
+ }
+
 
 function send_email(event) {
 
@@ -121,7 +153,23 @@ function view_email(email_id) {
   document.querySelector('#email-body').innerHTML = email.body;
 
 
+  //Whether the email is read or not
+  fetch(`/emails/${email_id}`, {
+    method: 'PUT',
+    body: JSON.stringify({
+        read: true
+    })
+  }).then( () => {
+    // Update the email item to reflect the read status
+    const emailItems = document.querySelectorAll('.email-item');
+    emailItems.forEach(item => {
+        if (item.dataset.emailId == email_id) {
+            item.classList.remove('unread');
+            item.classList.add('read');
+        }
+  })
         })
         
-} 
+});
+}
 
