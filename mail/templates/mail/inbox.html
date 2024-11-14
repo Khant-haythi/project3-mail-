@@ -28,8 +28,12 @@
             <div class="form-group">
                 <input class="form-control" id="compose-subject" placeholder="Subject">
             </div>
-            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+            <div class="mb-3">
+            <textarea class="form-control" id="compose-body" placeholder="Body" rows="8"></textarea>
+            </div>
+            <div class="row-auto">
             <input  type="submit" class="btn btn-primary"/>
+            </div>
         </form>
     </div>
 
@@ -43,6 +47,8 @@
       <p><strong>Timestamp:</strong> <span id="email-timestamp"></span></p>
       <hr>
       <div id="email-body"></div>  
+      <hr>
+      <button id="reply-button"  type="button" class="btn btn-outline-warning">Reply</button>
     </div>
 {% endblock %}
 

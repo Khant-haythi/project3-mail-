@@ -10,13 +10,13 @@ textarea {
   }
   
   /* If email has been read */
-  .email-item.read {
-    background-color: #f2f2f2;
+.read {
+    background-color: #d7d7d7;
   }
   
   /* If email is unread */
-  .email-item.unread {
-    background-color: #fff;
+.unread {
+    background-color: #FFFFFF;
   }
 
   .email-item .sender {
