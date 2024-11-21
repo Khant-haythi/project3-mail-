@@ -18,9 +18,9 @@ Emails in the Inbox can be archived, while those in the Archive can be unarchive
 Users can reply to an email from its detailed view.
 
 # 🛠 Technologies Used
--JavaScript
--HTML/CSS
--Django
+- JavaScript
+- HTML/CSS
+- Django
 
 # Watch the demonstration of my project at this link!
 🎥 https://youtu.be/jOGo5LTILqk?si=dDIUopAal_WhMa0m
